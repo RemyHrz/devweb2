@@ -39,7 +39,8 @@ def mainpage():
             visit_count=get_visit_count(username)
             return render_template("index.html", username=username, email=email, visit_count=visit_count, session_id=session_id)
         except:
-            return render_template("index.html")
+            session_id=session["session_id"]
+            return render_template("index.html", session_id=session_id)
 
 @app.route("/login", methods=["POST"])
 def login_page():
