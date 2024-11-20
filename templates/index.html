@@ -23,7 +23,7 @@
 </form>
 
 {% endif %}
-{{ session_id }}
+
 {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for message in messages %}
@@ -41,6 +41,7 @@ nombre de visites: {{visit_count}}
 
 <a href="/logout"><button class="btn-danger btn btn-sm">Déconnexion</button></a>
 {% endif %}
+{{ session_id }}
 </div>
 <script type="text/javascript">
     function loginform(){
