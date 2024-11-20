@@ -35,8 +35,9 @@ def mainpage():
         try:
             username=session["username"]
             email=session["email"]
+            session_id=session["session_id"]
             visit_count=get_visit_count(username)
-            return render_template("index.html", username=username, email=email, visit_count=visit_count)
+            return render_template("index.html", username=username, email=email, visit_count=visit_count, session_id=session_id)
         except:
             return render_template("index.html")
 
