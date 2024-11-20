@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Fruits page</title>
+{% endblock %}
+
+
+
+{% block body %}
+
+<a href="/" class="btn btn-primary btn-sm my-3">Go to Home</a>
+
+<h1>Choose Your Favorite Fruits</h1>
+    <form action="/fruits" method="POST">
+        <label for="fruits">Select your favorite fruits:</label>
+        <select id="fruits" name="fruits" multiple>
+            {% for fruit in fruits_list %}
+            <option value="{{ fruit }}" {% if fruits_select and fruit in fruits_select %}selected{% endif %}>{{fruit}}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+
+
+{% endblock %}
