@@ -36,13 +36,6 @@ def visit_counter(username):
     user.visits+=1
     db.session.commit()
 
-def create_account():
-    username, password, email = process_form()
-    user = User(username=username, email=email)
-    user.set_password(password)
-    db.session.add(user)
-    db.session.commit()
-
 def process_form():
     username = request.form["username"].strip()
     try:
@@ -55,6 +48,13 @@ def process_form():
     except:
         return username, email
     return username, password, email
+
+def create_account():
+    username, password, email = process_form()
+    user = User(username=username, email=email)
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
 
 def check_account():
     username, email, none = process_form()
