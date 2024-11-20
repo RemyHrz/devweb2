@@ -1,6 +1,7 @@
 from functools import wraps
 from flask import request, session, redirect, flash
 from models import db, User
+import uuid
 
 def flash_error(txt):
     return flash_message(txt, "alert-danger")
@@ -24,6 +25,17 @@ def logged_in(f):
                 return redirect("/logout")
         else:
             return redirect("/")
+    return decorated_func
+
+def if_session(f):
+    @wraps(f)
+    def decorated_func(*args,**kwargs):
+        if session:
+            return f(*args,**kwargs)
+        else:
+            session["session_id"]=uuid.uuid1()
+            session.permanent=True
+            return f(*args,**kwargs)
     return decorated_func
 
 def get_visit_count(username):

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import tomli
 from datetime import timedelta
 from models import db
-from tools import logged_in, get_visit_count, check_account, check_login, create_account
+from tools import logged_in, get_visit_count, check_account, check_login, create_account, if_session
 
 app = Flask(__name__)
 
@@ -23,7 +23,9 @@ app.app_context().push()
 with app.app_context():
     db.create_all()
 
+
 @app.route("/", methods=["GET","POST"])
+@if_session
 def mainpage():
     if request.method == "POST":
         check_account()
@@ -47,7 +49,6 @@ def login_page():
         return redirect("/")
 
 @app.route("/logout")
-@logged_in
 def logout():
     session.clear()
     return redirect("/")
