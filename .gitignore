@@ -7,6 +7,8 @@ venv/
 config.toml
 *.zip
 *.tar
+static/
+assests/
 # Distribution / packaging
 .Python
 build/
