@@ -55,6 +55,7 @@ def create_account():
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
+    flash(flash_success("Votre compte a été créé"))
 
 def check_account():
     username, email, none = process_form()

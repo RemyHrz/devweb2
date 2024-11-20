@@ -1,8 +1,8 @@
-from flask import Flask, render_template, request, redirect, session, flash
+from flask import Flask, render_template, request, redirect, session
 import tomli
 from datetime import timedelta
 from models import db
-from tools import logged_in, flash_success, get_visit_count, check_account, check_login, create_account
+from tools import logged_in, get_visit_count, check_account, check_login, create_account
 
 app = Flask(__name__)
 
@@ -28,7 +28,6 @@ def mainpage():
     if request.method == "POST":
         check_account()
         create_account()
-        flash(flash_success("Votre compte a été créé"))
         return redirect("/")
     else:
         try:
