@@ -5,21 +5,21 @@
 {% endblock %}
 
 {% block body %}
-<div class="mx-auto p-2">
+<div class="p-2 m-auto text-center">
 
 {% if not username or not email %}
 
 <p class="my-2">
-<button class="btn btn-primary btn-sm" id="accb" style="display:none;" onclick="accountform()">Créér un compte</button>
-<button class="btn btn-primary btn-sm" id="logb" onclick="loginform()">Se connecter</button>
+<button class="btn btn-primary btn-sm" id="accb" style="display:none;" onclick="accountform()">Create account</button>
+<button class="btn btn-primary btn-sm" id="logb" onclick="loginform()">Login</button>
 </p>
-<form id="form" action="/create_account" method="POST">
+<form class="m-3" id="form" action="/create_account" method="POST">
     <fieldset class="d-inline border border-primary-subtle rounded-1 p-2 bg-primary-subtle text-primary-emphasis bg-opacity-75">
-        <legend id="formlegend">Créer un compte:</legend>
+        <legend id="formlegend">Create account:</legend>
     <p>Username: <input required id="username" name="username" minlength="3" maxlength="25" pattern="[A-Za-z0-9]{3,25}"></p>
     <p id="emailsp">Email: <input required id="email" type="email" name="email"></p>
     <p>Password: <input required id="password" type="password" name="password" minlength="10"></p>
-    <input id="subut" class="btn btn-secondary btn-sm" type="submit" value="Créer">
+    <input id="subut" class="btn btn-secondary btn-sm" type="submit" value="Create">
 </fieldset>
 </form>
 
@@ -41,13 +41,13 @@ Adresse mail : {{email}} <br>
 nombre de visites: {{visit_count}}
 </h1>
 
-<a href="/logout"><button class="btn-danger btn btn-sm">Déconnexion</button></a>
+<a href="/logout"><button class="btn-danger btn btn-sm">Logout</button></a>
 {% endif %}
 <br>
 </div>
 <script type="text/javascript">
     function loginform(){
-        $('#formlegend').text("Se connecter:");
+        $('#formlegend').text("Login:");
         $('#email').prop('disabled', true);
         $('#form').attr('action', "/login");
         $('#emailsp').hide();
@@ -56,13 +56,13 @@ nombre de visites: {{visit_count}}
         $('#subut').val("Connexion");
     }
     function accountform(){
-        $('#formlegend').text("Créer un compte:");
+        $('#formlegend').text("Create account:");
         $('#email').prop('disabled', false);
         $('#form').attr('action', "/create_account");
         $('#emailsp').show();
         $('#accb').hide();
         $('#logb').show();
-        $('#subut').val("Créer");
+        $('#subut').val("Create");
     }
 </script>
 

@@ -24,7 +24,7 @@ app.app_context().push()
 with app.app_context():
     db.create_all()
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/", methods=["GET"])
 @if_session
 def mainpage():
     try:
@@ -35,7 +35,7 @@ def mainpage():
         return render_template("index.html", username=username, email=email, visit_count=visit_count)
     except:
         session_id=session["session_id"]
-        return render_template("index.html", session_id=session_id)
+        return render_template("index.html")
 
 @app.route("/create_account", methods=["POST"])
 @if_session
@@ -47,16 +47,14 @@ def account_route():
 @app.route("/login", methods=["POST"])
 @if_session
 def login_page():
-    if request.method == "POST":
-        check_login()
-        return redirect("/")
-    else:
-        return redirect("/")
+    check_login()
+    return redirect("/")
 
-@app.route("/logout")
+@app.route("/logout", methods=["GET"])
 def logout():
     session.clear()
     return redirect("/")
 
 if __name__=="__main__":
 	app.run(debug=True)
+    #remove debug=True in production
