@@ -67,14 +67,14 @@ def create_account():
     user.set_password(password)
     db.session.add(user)
     db.session.commit()
-    flash(flash_success("Votre compte a été créé"))
+    flash(flash_success("Your account has been created"))
 
 def check_account():
     username, email, none = process_form()
     user = User.query.filter(User.username==username).first()
     mail = User.query.filter(User.email==email).first()
     if user or mail:
-        flash(flash_error("Ce nom d'utilisateur ou cette adresse mail est déja utilisée!"))
+        flash(flash_error("An account already exists with these credentials!"))
         return redirect("/")
 
 def check_login():
@@ -85,6 +85,5 @@ def check_login():
         session["email"]=user.email
         visit_counter(username)
         session.permanent=True
-        flash(flash_success("connexion réussie"))
     else:
-        flash(flash_error("Le mot de passe est incorrect"))
+        flash(flash_error("Wrong password"))
