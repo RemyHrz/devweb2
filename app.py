@@ -23,8 +23,6 @@ app.app_context().push()
 with app.app_context():
     db.create_all()
 
-FRUITS=["apple","banana","lemon","cherry"]
-
 @app.route("/", methods=["GET","POST"])
 @if_session
 def mainpage():
@@ -42,21 +40,6 @@ def mainpage():
         except:
             session_id=session["session_id"]
             return render_template("index.html", session_id=session_id)
-
-@app.route("/fruits", methods=["GET","POST"])
-@if_session
-def fruits():
-    if request.method=="POST":
-        fruits=" ".join(request.form.getlist("fruits"))
-        session["fruits"]=fruits
-        return redirect("/fruits")
-    else:
-        if "fruits" in session:
-            fruits_select=session["fruits"]
-            return render_template("fruits.html",fruits_list=FRUITS, fruits_select=fruits_select)
-        else:
-            return render_template("fruits.html", fruits_list=FRUITS)
-
 
 @app.route("/login", methods=["POST"])
 @if_session
