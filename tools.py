@@ -33,7 +33,7 @@ def if_session(f):
         if session:
             return f(*args,**kwargs)
         else:
-            session["session_id"]=uuid.uuid1()
+            session["session_id"]=uuid.uuid4()
             session.permanent=True
             return f(*args,**kwargs)
     return decorated_func
