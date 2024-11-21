@@ -2,13 +2,12 @@
 __pycache__/
 venv/
 *.db
+static/
 # C extensions
 *.so
 config.toml
 *.zip
 *.tar
-static/
-assets/
 # Distribution / packaging
 .Python
 build/
