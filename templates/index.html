@@ -13,7 +13,7 @@
 <button class="btn btn-primary btn-sm" id="accb" style="display:none;" onclick="accountform()">Créér un compte</button>
 <button class="btn btn-primary btn-sm" id="logb" onclick="loginform()">Se connecter</button>
 </p>
-<form id="form" action="/" method="POST">
+<form id="form" action="/create_account" method="POST">
     <fieldset class="d-inline border border-primary-subtle rounded-1 p-2 bg-primary-subtle text-primary-emphasis bg-opacity-75">
         <legend id="formlegend">Créer un compte:</legend>
     <p>Username: <input required id="username" name="username" minlength="3" maxlength="25" pattern="[A-Za-z0-9]{3,25}"></p>
@@ -44,7 +44,6 @@ nombre de visites: {{visit_count}}
 <a href="/logout"><button class="btn-danger btn btn-sm">Déconnexion</button></a>
 {% endif %}
 <br>
-{{ session_id }}
 </div>
 <script type="text/javascript">
     function loginform(){
@@ -59,7 +58,7 @@ nombre de visites: {{visit_count}}
     function accountform(){
         $('#formlegend').text("Créer un compte:");
         $('#email').prop('disabled', false);
-        $('#form').attr('action', "/");
+        $('#form').attr('action', "/create_account");
         $('#emailsp').show();
         $('#accb').hide();
         $('#logb').show();

@@ -6,6 +6,7 @@ from tools import logged_in, get_visit_count, check_account, check_login, create
 
 app = Flask(__name__)
 
+#You need to create your own config.toml with SECRET_KEY="Your_Secret_Key"
 with open("config.toml", "rb") as file:
     config_secrets = tomli.load(file)
 
@@ -26,20 +27,22 @@ with app.app_context():
 @app.route("/", methods=["GET","POST"])
 @if_session
 def mainpage():
-    if request.method == "POST":
-        check_account()
-        create_account()
-        return redirect("/")
-    else:
-        try:
-            username=session["username"]
-            email=session["email"]
-            session_id=session["session_id"]
-            visit_count=get_visit_count(username)
-            return render_template("index.html", username=username, email=email, visit_count=visit_count, session_id=session_id)
-        except:
-            session_id=session["session_id"]
-            return render_template("index.html", session_id=session_id)
+    try:
+        username=session["username"]
+        email=session["email"]
+        session_id=session["session_id"]
+        visit_count=get_visit_count(username)
+        return render_template("index.html", username=username, email=email, visit_count=visit_count)
+    except:
+        session_id=session["session_id"]
+        return render_template("index.html", session_id=session_id)
+
+@app.route("/create_account", methods=["POST"])
+@if_session
+def account_route():
+    check_account()
+    create_account()
+    return redirect("/")
 
 @app.route("/login", methods=["POST"])
 @if_session
